@@ -58,6 +58,7 @@ var dude1 = {name: "Kyle", score: {w:0,t:0,l:0}};
 var dude2 = {name: "Darren", score: {w:0,t:0,l:0}};
 var dude3 = {name: "Ben Dover", score: {w:0,t:0,l:0}};
 var dude4 = {name: "Mike Hunt", score: {w:0,t:0,l:0}};
+var winnerPool = [];
 
 // Takes two player objects as arguments
 // Gets hands from each
@@ -68,44 +69,44 @@ var dude4 = {name: "Mike Hunt", score: {w:0,t:0,l:0}};
 function playRound(p1,p2){
    p1.hand = getHand();
    p2.hand = getHand();
-   console.log(p1, p2);
+   // console.log(p1, p2);
    if(p1.hand === p2.hand){
-      console.log("It's a tie!")
+      // console.log("It's a tie!")
       p1.score.t++
       p2.score.t++
    }
    if(p1.hand === "Rock"){
       if(p2.hand === "Paper"){
-         console.log(p2.name + " wins!")
+         // console.log(p2.name + " wins!")
          p2.score.w++
          p1.score.l++
       }
       if(p2.hand === "Scissors"){
-         console.log(p1.name + " wins!")
+         // console.log(p1.name + " wins!")
          p1.score.w++
          p2.score.l++
       }
    }
    if(p1.hand === "Paper"){
       if(p2.hand === "Scissors"){
-         console.log(p2.name + " wins!")
+         // console.log(p2.name + " wins!")
          p2.score.w++
          p1.score.l++
       }
       if(p2.hand === "Rock"){
-         console.log(p1.name + " wins!")
+         // console.log(p1.name + " wins!")
          p1.score.w++
          p2.score.l++
       }
    }
    if(p1.hand === "Scissors"){
       if(p2.hand === "Rock"){
-         console.log(p2.name + " wins!")
+         // console.log(p2.name + " wins!")
          p2.score.w++
          p1.score.l++
       }
       if(p2.hand === "Paper"){
-         console.log(p1.name + " wins!")
+         // console.log(p1.name + " wins!")
          p1.score.w++
          p2.score.l++
       }
@@ -113,7 +114,7 @@ function playRound(p1,p2){
 }
 
 seeWinner = (arg1, arg2) => {
-   console.log(arg1, arg2);
+   // console.log(arg1, arg2);
    var winner = null;
    if(arg1.score.w > arg2.score.w){
       console.log(arg1.name + " is the overall winner");
@@ -125,11 +126,8 @@ seeWinner = (arg1, arg2) => {
    }
    if(arg2.score.w === arg1.score.w){
       console.log("The game ended in a tie.");
-      for(var i=0; 5 > i; i++){
-         playRound(arg1, arg2);
-      }
    }
-   console.log(winner);
+   winnerPool.push(winner);
 }
 
 function startGames(){
@@ -139,6 +137,7 @@ function startGames(){
    }
    seeWinner(dude1, dude2);
    seeWinner(dude3, dude4);
+   console.log(winnerPool);
 };
 
 startGames();
