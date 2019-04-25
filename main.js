@@ -12,14 +12,13 @@ add(1,2,3,4,5,6,7,8);
 
 // create a variable titled billAmount and store a random number (ie: 100)
 var billAmount = 100;
-var coolio = "Wayy too cool"
-var inputG = "";
+
 
 document.getElementById("inputBtn").addEventListener("click", changeInput);
 
 // create a function titled gratuity()gratutity should: multiply the value of billAmount by 20%   **hint: use 0.2** 
 // return the value
-function gratuity(cost){
+gratuity = function(cost){
    var numCost = parseInt(cost);
    console.log("Base bill price: " + numCost);
    var tip = numCost * .2;
@@ -53,23 +52,31 @@ getHand = () => {
    var randomNum = hands[parseInt(Math.random()*10)];
    return randomNum;
 }
-// Define two objects for two players. Each player has name and getHand() properties.
+// Define two objects for two players. 
 var dude1 = {name: "Kyle", score: {w:0,t:0,l:0}};
 var dude2 = {name: "Darren", score: {w:0,t:0,l:0}};
-var dude3 = {name: "Ben Dover", score: {w:0,t:0,l:0}};
-var dude4 = {name: "Mike Hunt", score: {w:0,t:0,l:0}};
+var toFive = false;
 var winnerPool = [];
+// Define a function called playRound() that:
+   // 1 Takes two player objects as arguments
+   // 2 Gets hands from each
+   // 3 Determines the winner
+   // 4 Logs the hands played and name of the winner.
+   // 5 If its a tie, log the hands played and "it's a tie".
+   // 6 Returns the winner object (null if no winner)
 
-// Takes two player objects as arguments
-// Gets hands from each
-// Determines the winner
-// Logs the hands played and name of the winner.
-// If its a tie, log the hands played and "it's a tie".
-// Returns the winner object (null if no winner)
+// 1 
+// serves as the game logic of reading the strings and changes the score accordingly 
 function playRound(p1,p2){
+
+   // 2 
+   // Each player has name and getHand() properties.
+   // they are assigned here so they get a new random # each iteration
    p1.hand = getHand();
    p2.hand = getHand();
-   // console.log(p1, p2);
+
+   // console.log(p1, p2); //check that arguments came in correctly
+
    if(p1.hand === p2.hand){
       // console.log("It's a tie!")
       p1.score.t++
@@ -111,8 +118,17 @@ function playRound(p1,p2){
          p2.score.l++
       }
    }
+   if(p1.score.w === 5){
+      toFive = true;
+   }
+   if(p2.score.w === 5){
+      toFive = true;
+   }
 }
 
+// 3
+// This function is made seperate so that it only fires when the while loop ends
+// If it was part of the function that is called in the iterator it would repeate and fire each iteration
 seeWinner = (arg1, arg2) => {
    // console.log(arg1, arg2);
    var winner = null;
@@ -124,20 +140,15 @@ seeWinner = (arg1, arg2) => {
       console.log(arg2.name + " is the overall winner");
       winner = arg2
    }
-   if(arg2.score.w === arg1.score.w){
-      console.log("The game ended in a tie.");
-   }
    winnerPool.push(winner);
 }
 
 function startGames(){
-   for(var i=0; 5 > i; i++){
+   while(toFive === false){
       playRound(dude1, dude2);
-      playRound(dude3, dude4);
    }
    seeWinner(dude1, dude2);
-   seeWinner(dude3, dude4);
-   console.log(winnerPool);
+   console.log(dude1, dude2);
 };
 
 startGames();
