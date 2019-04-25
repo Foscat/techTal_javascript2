@@ -13,7 +13,6 @@ add(1,2,3,4,5,6,7,8);
 // create a variable titled billAmount and store a random number (ie: 100)
 var billAmount = 100;
 
-
 document.getElementById("inputBtn").addEventListener("click", changeInput);
 
 // create a function titled gratuity()gratutity should: multiply the value of billAmount by 20%   **hint: use 0.2** 
@@ -152,7 +151,4 @@ function startGames(){
 };
 
 startGames();
-
-
-
 
